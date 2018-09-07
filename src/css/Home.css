@@ -1,0 +1,19 @@
+.wrap-home {
+    display: flex;
+    justify-content: center;
+}
+.home-content {
+    background-color: blanchedalmond;
+    width: 1000px;
+}
+.wrap-slider {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.wrap-slider span {
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #555;
+}

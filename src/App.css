@@ -1,0 +1,6 @@
+.App {
+  background-color: brown;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 111px 1fr;
+}

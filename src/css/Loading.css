@@ -1,0 +1,12 @@
+.wrap-loading {
+    display: flex;
+    justify-content: center;
+}
+.loading-content {
+    width: 1000px;
+    color: #adb5bd;
+    text-align: center
+}
+.loading-content i {
+    margin-top: 100px;
+}
