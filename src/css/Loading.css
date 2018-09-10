@@ -4,6 +4,7 @@
 }
 .loading-content {
     width: 1000px;
+    height: 100vh;
     color: #adb5bd;
     text-align: center
 }

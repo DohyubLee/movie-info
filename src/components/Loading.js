@@ -1,7 +1,10 @@
 import React from 'react';
 import 'css/Loading.css';
 
-const Loading = () => {
+const Loading = ({match, _getDetail}) => {
+    if (match) {
+        _getDetail(match.params.id);
+    }
     return (
         <div className="wrap-loading">
             <div className="loading-content">
