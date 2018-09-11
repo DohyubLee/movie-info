@@ -24,7 +24,7 @@ class App extends Component {
     })
   }
   _callApiDetail = (num) => {
-    return fetch(`https://api.themoviedb.org/3/movie/${num}?api_key=dfebf9cfca6fde7ded33adb1b64575ab`)
+    return fetch(`https://api.themoviedb.org/3/movie/${num}?api_key=dfebf9cfca6fde7ded33adb1b64575ab&language=ko`)
     .then(res => res.json())
     .catch(err => console.log(err))
   }
@@ -34,19 +34,31 @@ class App extends Component {
       movie
     })
   }
+  _callApiCredits = (num) => {
+    return fetch(`https://api.themoviedb.org/3/movie/${num}/credits?api_key=dfebf9cfca6fde7ded33adb1b64575ab&language=ko`)
+    .then(res => res.json())
+    .then(res => res.cast.slice(0,5))
+    .catch(err => console.log(err))
+  }
+  _getCredits = async (num) => {
+    const credits = await this._callApiCredits(num);
+    this.setState({
+      credits
+    })
+  }
   render() {
-    const { movies, movie } = this.state;
+    const { movies, movie, credits } = this.state;
     return (
       <div className="App">
         <Header />
         {this.state.movies
-          ?<Route exact path="/" component={() => <Home movies={movies} />} />
+          ?<Route exact path="/" component={(props) => <Home {...props} movies={movies} />} />
           :<Loading />
         } 
         <Route path="/movie" component={Movie} />
         {this.state.movie
-          ?<Route path="/detail/:id" render={(props) => <Detail {...props} _getDetail={this._getDetail} movie={movie} />} />
-          :<Route path="/detail/:id" render={(props) => <Loading {...props} _getDetail={this._getDetail} />} />
+          ?<Route path="/detail/:id" render={(props) => <Detail {...props} _getDetail={this._getDetail} _getCredits={this._getCredits} credits={credits} movie={movie} />} />
+          :<Route path="/detail/:id" render={(props) => <Loading {...props} _getDetail={this._getDetail} _getCredits={this._getCredits} />} />
         }
       </div>
     );

@@ -1,0 +1,46 @@
+.wrap-detail {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.wrap-detail > div {
+    width: 1000px;
+}
+.detail-top {
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.top-left {
+    width: 35%;
+}
+.top-right {
+    flex: 1;
+}
+.top-right .genre {
+    margin-right: 10px
+}
+.detail-bottom {
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.detail-bottom img{
+    width: 140px;
+}
+.card {
+    flex: 1;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
