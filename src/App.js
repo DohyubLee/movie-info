@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, Header, Movie, Loading, Detail } from 'components'
-
 import './App.css';
-import matchPath from 'react-router-dom/matchPath';
 
 class App extends Component {
   state = {}
   componentDidMount() {
+    console.log("app :",this)
     this._getMovies('now_playing');
   }
-  _callApi = () => {
-    const name = 'now_playing';
+  _callApi = (res) => {
+    let name = 'now_playing';
+    if (res !== 'now_playing') {
+      name = res;
+    }
     return fetch(`https://api.themoviedb.org/3/movie/${name}?api_key=dfebf9cfca6fde7ded33adb1b64575ab`)
     .then(res => res.json())
     .then(json => json.results)
     .catch(err => console.log(err))
   }
-  _getMovies = async () => {
-    const movies = await this._callApi();
+  _getMovies = async (name) => {
+    const movies = await this._callApi(name);
     this.setState({
       movies
     })
@@ -55,7 +57,8 @@ class App extends Component {
           ?<Route exact path="/" component={(props) => <Home {...props} movies={movies} />} />
           :<Loading />
         } 
-        <Route path="/movie" component={Movie} />
+        {/* <Route path="/movie/:id" component={Movie} /> */}
+        <Route exact path="/movie/:id" component={(props) => <Movie {...props} _getMovies={this._getMovies} movies={movies} />} />
         {this.state.movie
           ?<Route path="/detail/:id" render={(props) => <Detail {...props} _getDetail={this._getDetail} _getCredits={this._getCredits} credits={credits} movie={movie} />} />
           :<Route path="/detail/:id" render={(props) => <Loading {...props} _getDetail={this._getDetail} _getCredits={this._getCredits} />} />

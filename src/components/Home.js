@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 class Home extends Component {
     render() {
-        console.log("props: ",this.props);
         const movies = this.props.movies;
         const moviesList = movies.map(({poster_path, id}) => {
             return <MovieItem poster={poster_path} id={id} key={id} />
