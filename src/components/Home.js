@@ -67,7 +67,8 @@ const MovieItem = ({poster, id}) => {
     return (
         <div className="wrap-poster">
             <Link className="poster" to={path}><img src={`https://image.tmdb.org/t/p/w200${poster}`}/>
-            <span className="hover-text">상세보기</span></Link>
+                <span className="hover-text">상세보기</span>
+            </Link>
         </div>
     )
 }

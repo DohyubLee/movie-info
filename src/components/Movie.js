@@ -74,7 +74,9 @@ const Template = ({movies}) => {
                                 basedOn='letters'
                                 />
                             </h5>
-                            상세보기
+                            <div>
+                                <Link className="detail-link" to={`/detail/${id}`}>상세보기</Link>
+                            </div>  
                         </div>
                     </div>
                 )
