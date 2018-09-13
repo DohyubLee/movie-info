@@ -28,3 +28,12 @@ header {
 .link-text:hover {
     text-decoration-line: underline;
 }
+@media screen and (max-width: 1090px) {
+    .header-content {
+        margin-left: 20px;
+        width: 100%
+    }
+    .header-content ul {
+        width: 80%;
+    }
+}

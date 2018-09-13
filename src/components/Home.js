@@ -13,10 +13,21 @@ class Home extends Component {
         .then(json => json.results)
         .catch(err => console.log(err))
     }
+    _callApiKo = () => {
+        const name = 'now_playing';
+        return fetch(`https://api.themoviedb.org/3/movie/${name}?api_key=dfebf9cfca6fde7ded33adb1b64575ab&language=ko`)
+        .then(res => res.json())
+        .then(json => json.results)
+        .catch(err => console.log(err))
+    }
     _getMovies = async () => {
         const movies = await this._callApi();
+        const moviesKo = await this._callApiKo();
+        console.log(movies)
+        console.log(moviesKo)
         this.setState({
-          movies
+          movies,
+          moviesKo
         })
     }
     componentDidMount() {
@@ -28,19 +39,23 @@ class Home extends Component {
         })
         return moviesList;
     }
+    _renderMoviesKo = () => {
+        const moviesListKo = this.state.moviesKo.map(({id, backdrop_path, title, release_date}) => {
+            return <MovieItemKo poster={backdrop_path} id={id} key={id} title={title} date={release_date} />
+        })
+        return moviesListKo;
+    }
     render() {
         const settings = {
-            className: "center",
+            className: "slider",
             centerPadding: "90px",
-            infinite: true,
             speed: 2000,
             slidesToShow: 4,
-            slidesToScroll: 1,
+            slidesToScroll: 3,
             centerMode: true,
             rows: 2,
             autoplay: true,
-            autoplaySpeed: 2000, 
-            pauseOnHover: true
+            autoplaySpeed: 2000
         }
         return (
             <section className="wrap-home">
@@ -49,9 +64,12 @@ class Home extends Component {
                         <span>현재 상영작</span>
                         {this.state.movies
                             ?(
-                                <Slider {...settings}>
-                                    {this._renderMovies()}
-                                </Slider>
+                                <React.Fragment>
+                                    <Slider {...settings}>
+                                        {this._renderMovies()}
+                                    </Slider>
+                                    <div className="resposive">{this._renderMoviesKo()}</div>
+                                </React.Fragment>
                             )
                             :<Loading />
                         }
@@ -66,10 +84,26 @@ const MovieItem = ({poster, id}) => {
     let path = `detail/${id}`;
     return (
         <div className="wrap-poster">
-            <Link className="poster" to={path}><img src={`https://image.tmdb.org/t/p/w200${poster}`}/>
+            <Link className="poster" to={path}>
+                <img src={`https://image.tmdb.org/t/p/w200${poster}`}/>
                 <span className="hover-text">상세보기</span>
             </Link>
         </div>
+    )
+}
+
+const MovieItemKo = ({poster, id, title, date}) => {
+    let path = `detail/${id}`;
+    return (
+        <Link className="resposive-link" to={path}>
+            <div className="resposive-poster">
+                <img src={`https://image.tmdb.org/t/p/w200${poster}`}/>
+                <div className="resposive-text">
+                    <span>{title}</span>
+                    <span>{date}</span>
+                </div>
+            </div>
+        </Link>
     )
 }
 
