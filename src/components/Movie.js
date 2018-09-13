@@ -43,10 +43,10 @@ class Movie extends Component {
             <div className="wrap-movies">
                 <div className="movie-content">
                 <div className="movie-category">{param.toUpperCase()}</div>
-                    {this.state.movies
-                        ?this._renderMovies()
-                        :<Loading />
-                    }
+                {this.state.movies
+                    ?this._renderMovies()
+                    :<Loading />
+                }
                 </div>
             </div>
         );

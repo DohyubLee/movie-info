@@ -44,5 +44,21 @@
     width: 100%;
 }
 @media screen and (max-width: 1090px) {
-    
+    .movie-category {
+        width: 100%;
+    }
+    .movie-content {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .movie {
+        font-size: 85%;
+    }
+}
+@media screen and (max-width: 720px) {
+    .movie {
+        width: 100%;
+        font-size: 100%;
+    }
 }
