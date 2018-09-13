@@ -54,7 +54,7 @@ class Movie extends Component {
 }
 
 const Template = ({movies}) => {
-    // console.log("movies :",movies)
+    const defaultPath = "/movie-info"
     return (
         <React.Fragment>
             {movies.map(({title, id, poster_path, overview}) => {
@@ -75,7 +75,7 @@ const Template = ({movies}) => {
                                 />
                             </h5>
                             <div>
-                                <Link className="detail-link" to={`/detail/${id}`}>상세보기</Link>
+                                <Link className="detail-link" to={defaultPath + `/detail/${id}`}>상세보기</Link>
                             </div>  
                         </div>
                     </div>
