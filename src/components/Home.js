@@ -81,7 +81,8 @@ class Home extends Component {
 }
 
 const MovieItem = ({poster, id}) => {
-    let path = `detail/${id}`;
+    const defaultPath = "/movie-info"
+    let path = `${defaultPath}/detail/${id}`;
     return (
         <div className="wrap-poster">
             <Link className="poster" to={path}>

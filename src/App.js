@@ -5,12 +5,13 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const defaultPath = "/movie-info"
     return (
       <div className="App">
         <Header />
-        <Route exact path="/" component={Home} />
-        <Route path="/movie/:id" component={Movie} />
-        <Route path="/detail/:id" component={Detail} />
+        <Route exact path={defaultPath + "/"} component={Home} />
+        <Route path={defaultPath + "/movie/:id"} component={Movie} />
+        <Route path={defaultPath + "/detail/:id"} component={Detail} />
       </div>
     );
   }
