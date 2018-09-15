@@ -27,6 +27,7 @@
 .detail-bottom {
     display: flex;
     margin-bottom: 20px;
+    flex-wrap: wrap;
     justify-content: space-between;
     
 }
