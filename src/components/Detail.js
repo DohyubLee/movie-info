@@ -5,7 +5,6 @@ import Loading from './Loading'
 class Detail extends Component {
     state = {}
     componentDidMount() {
-        console.log(this)
         this._getDetail(this.props.match.params.id)
     }
     _callApiDetail = (num) => {

@@ -23,8 +23,6 @@ class Home extends Component {
     _getMovies = async () => {
         const movies = await this._callApi();
         const moviesKo = await this._callApiKo();
-        console.log(movies)
-        console.log(moviesKo)
         this.setState({
           movies,
           moviesKo
