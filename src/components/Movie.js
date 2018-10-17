@@ -18,17 +18,21 @@ class Movie extends Component {
           movies
         })
     }
+    //props 변경에 따른 상태 변화 라이프사이클
     componentWillReceiveProps(nextProps) {
         console.log("componentWillReceiveProps()")
-        const param = nextProps.match.params.id;
-        this.setState({
-            movies: null
-        })
-        this._getMovies(param)
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            const param = nextProps.match.params.id;
+            //로딩 효과를 주기위해 null로 초기화`
+            this.setState({
+                movies: null
+            })
+            this._getMovies(param)
+        }
     }
     componentDidMount() {
-        console.log("componentDidMount()")
-        console.log("params.id :,",this.props.match.params.id)
+        // console.log("componentDidMount()")
+        // console.log("params.id :,",this.props.match.params.id)
         this._getMovies(this.props.match.params.id);
     }
     _renderMovies = () => {
@@ -38,7 +42,7 @@ class Movie extends Component {
     render() {
         console.log("render()")
         const param = this.props.match.params.id;
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <div className="wrap-movies">
                 <div className="movie-content">

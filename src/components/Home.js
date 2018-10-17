@@ -13,7 +13,7 @@ class Home extends Component {
         .then(json => json.results)
         .catch(err => console.log(err))
     }
-    _callApiKo = () => {
+    _callApiRp = () => {
         const name = 'now_playing';
         return fetch(`https://api.themoviedb.org/3/movie/${name}?api_key=dfebf9cfca6fde7ded33adb1b64575ab&language=ko`)
         .then(res => res.json())
@@ -22,10 +22,10 @@ class Home extends Component {
     }
     _getMovies = async () => {
         const movies = await this._callApi();
-        const moviesKo = await this._callApiKo();
+        const moviesRp = await this._callApiRp();
         this.setState({
           movies,
-          moviesKo
+          moviesRp
         })
     }
     componentDidMount() {
@@ -37,9 +37,9 @@ class Home extends Component {
         })
         return moviesList;
     }
-    _renderMoviesKo = () => {
-        const moviesListKo = this.state.moviesKo.map(({id, backdrop_path, title, release_date}) => {
-            return <MovieItemKo poster={backdrop_path} id={id} key={id} title={title} date={release_date} />
+    _renderMoviesRp = () => {
+        const moviesListKo = this.state.moviesRp.map(({id, backdrop_path, title, release_date}) => {
+            return <MovieItemRp poster={backdrop_path} id={id} key={id} title={title} date={release_date} />
         })
         return moviesListKo;
     }
@@ -47,13 +47,11 @@ class Home extends Component {
         const settings = {
             className: "slider",
             centerPadding: "90px",
-            speed: 2000,
+            speed: 1000,
             slidesToShow: 4,
             slidesToScroll: 3,
             centerMode: true,
-            rows: 2,
-            autoplay: true,
-            autoplaySpeed: 2000
+            rows: 2
         }
         return (
             <section className="wrap-home">
@@ -66,7 +64,7 @@ class Home extends Component {
                                     <Slider {...settings}>
                                         {this._renderMovies()}
                                     </Slider>
-                                    <div className="resposive">{this._renderMoviesKo()}</div>
+                                    <div className="resposive">{this._renderMoviesRp()}</div>
                                 </React.Fragment>
                             )
                             :<Loading />
@@ -91,7 +89,7 @@ const MovieItem = ({poster, id}) => {
     )
 }
 
-const MovieItemKo = ({poster, id, title, date}) => {
+const MovieItemRp = ({poster, id, title, date}) => {
     let path = `detail/${id}`;
     return (
         <Link className="resposive-link" to={path}>
